@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>WCD</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/styles2.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="font-family:Impact" href="/">IMT</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">HOME</a></li>
+                <li><a href="/movies">NOW PLAYING</a></li>
+                <li class="active"><a href="/checkout">CHECKOUT</a></li>
+                <li><a href="/admin">ADMIN</a></li>
+            </ul>
+        </div>
+    </nav>
+    <h1>CHECKOUT</h1>
+    <BR>
+    <br>
+    <br>
+    <div class="container">
+        
+        <table class="table table-hover" border="3">
+            <thead>
+                <tr>
+                    <th>RESERVATION</th>
+                    <th>MOVIE</th>
+                    <th>ADULT TICKET(S)</th>
+                    <th>CHILD TICKET(S)</th>
+                    <th>SENIOR TICKET(S)</th>
+                    <th>SHOWTIME</th>
+                    <th>DAY</th>
+                    <th>THEATER</th>
+                </tr>
+            </thead>
+            <tbody id="checkoutTable2", name="checkoutTable2"></tbody>
+                {% for c in checkout %}
+                <tr> 
+                    <td name = "reservationID" value={{c[0]}}>{{ c[0] }}</td>
+                    <td value={{c[0]}}>{{ c[1] }}</td>
+                    <td value={{c[0]}}>{{ c[2] }}</td>
+                    <td value={{c[0]}}>{{ c[3] }}</td>
+                    <td value={{c[0]}}>{{ c[4] }}</td>
+                    <td value={{c[0]}}>{{ c[5] }}</td>
+                    <td value={{c[0]}}>{{ c[6] }}</td>
+                    <td value={{c[0]}}>{{ c[7] }}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+
+
+
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>    
+        </table>
+        
+            {% for c in checkout %}
+            <form action="/deleteReserveTicket" method="POST">        
+                <input type="hidden" name="reservationID" value={{c[0]}}>
+                <button class="btn btn-danger btn-sm" type="submit" value="CANCEL Reservation">CANCEL RESERVATION</button>
+            </form>
+            {% endfor %}
+    
+        <br>
+    </div>
+    <h3>ENTER NAME & EMAIL TO CONFIRM</h3>
+    <div class="container">
+        <table class="table table-hover" border="3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>EMAIL</th>
+                
+                </tr>
+            </thead>
+            <form name= "reservationPost" method='POST'>
+            <tr>
+                {% for c in checkout %}
+                <td><input type='text'name='reservationID' value={{c[0]}} placeholder="ID" readonly></td>
+                {% endfor %}
+                <td><input type="text" name = "cust_name" class="form-control" placeholder="First & Last"/></td>
+                <td><input type="text" name = "cust_email" class="form-control" placeholder="youremail@example.com" /></td>  
+            </tr>
+            
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <br>
+        </table>
+        <td> <button class="btn btn-primary btn-sm" type="submit" name='button1' value='submitTickets'>Update & Complete Reservation</button></td>
+    </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    
+
+<script src=""></script>
+
+</body>
+
+</html>

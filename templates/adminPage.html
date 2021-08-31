@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>WCD</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/styles2.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+   
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="font-family:Impact" href="/">IMT</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">HOME</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>{{ message }}</strong>
+    </div>
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+
+
+    <head>
+        <title>ADMIN PAGE</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    </head>
+
+
+
+    <div class="container">
+        <h1>Administrator Level</h1>
+        <br>
+        <br>
+        <br>
+
+
+        <h2>Reservations</h2>
+        <!-- SEARCH BAR -->
+        <input class="form-control" id="myInput" type="text" name="myTable" placeholder="Search reservations for customer info via NAME, or EMAIL">
+        <br>
+        <!-- CURRENT RESERVATIONS -->
+        <table id="CurrentTable" name="myTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>EMAIL</th>
+                    <th>MOVIE</th>
+                    <th>DAY</th>
+                    <th>SHOWTIME</th>
+                    <th>SCREEN</th>
+                    <th>ADULTS</th>
+                    <th>CHILDREN</th>
+                    <th>SENIORS</th>
+                    <!-- <th>SOLD OUT</th> -->
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="myTable" , name="myTable1">
+                {% for ppl in people %}
+                <tr>
+                    <td value={{ppl[0]}}>{{ ppl[0] }}</td>
+                    <td value={{ppl[0]}}>{{ ppl[1] }}</td>
+                    <td value={{ppl[0]}}>{{ ppl[2] }}</td>
+                    <td value={{ppl[0]}}>{{ ppl[3] }}</td>
+                    <td value={{ppl[0]}}>{{ ppl[4] }}</td>
+                    <td value={{ppl[0]}}>{{ ppl[5] }}</td>
+                    <td value={{ppl[0]}}>{{ ppl[6] }}</td>
+                    <td value={{ppl[0]}}>{{ ppl[7] }}</td>
+                    <td value={{ppl[0]}}>{{ ppl[8] }}</td>
+                    <td value={{ppl[0]}}>{{ ppl[9] }}</td>
+                    <td>
+                        <form action="/deleteReserveAdmin" method="POST">
+                            <input type="hidden" name="reservationID" value={{ppl[0]}}>
+                            <input class="btn btn-danger btn-sm" type="submit" value="DELETE Reservation">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+        <br>
+
+        <br>
+        <h2>Current Movies</h2>
+
+        <!-- CURRENT MOVIES -->
+        <table id="moviesTable" name="moviesTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TITLE</th>
+                    <th>RATING</th>
+                    <th>GENRE</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="moviesTable2" , name="moviesTable2">
+                {% for m in movies %}
+                <tr>
+                    <td value={{m[0]}}>{{ m[0] }}</td>
+                    <td value={{m[0]}}>{{ m[1] }}</td>
+                    <td value={{m[0]}}>{{ m[2] }}</td>
+                    <td value={{m[0]}}>{{ m[3] }}</td>
+                    <td>
+                        <form action="/deleteMovieAdmin" method="POST">
+                            <input type="hidden" name="movieID" value={{m[0]}}>
+                            <input class="btn btn-danger" type="submit" value="DELETE Movie">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- GO TO ADD MOVIE PAGE -->
+        <th><h3><button><a href="/addMovie">ADD MOVIE</a></button></h3></th>
+
+
+        <br>
+        <br>
+        <h2>Current Showtimes</h2>
+        <!-- CURRENT SHOWTIMES -->
+        <table id="showtimesTable" name="showtimesTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TITLE</th>
+                    <th>START TIME</th>
+                    <th>MOVIE DAY</th>
+                    <th>SEATS AVAILABLE</th>
+                    <th>SCREEN</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="showtimesTable2" , name="showtimesTable2">
+                {% for s in showtimes %}
+                <tr>
+                    <td value={{s[0]}}>{{ s[0] }}</td>
+                    <td value={{s[0]}}>{{ s[1] }}</td>
+                    <td value={{s[0]}}>{{ s[2] }}</td>
+                    <td value={{s[0]}}>{{ s[3] }}</td>
+                    <td value={{s[0]}}>{{ s[4] }}</td>
+                    <td value={{s[0]}}>{{ s[5] }}</td>
+                    <td>
+                        <form action="/deleteShowtimeAdmin" method="POST">
+                            <input type="hidden" name="showtimeID" value={{s[0]}}>
+                            <input class="btn btn-danger" type="submit" value="DELETE Showtime">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- GOTO ADD/REMOVE PAGE -->
+        <th><h3><button><a href="/addShowtime">ADD SHOWTIME</a></button></h3></th>
+
+
+        <br>
+
+        <br>
+        <h2>Current Theaters</h2>
+        <!-- CURRENT THEATERS -->
+        <table id="theatersTable" name="theatersTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>SCREEN NAME</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="theaterTable2" , name="theaterTable2">
+                {% for t in theaters %}
+                <tr>
+                    <td value={{t[0]}}>{{ t[0] }}</td>
+                    <td value={{t[0]}}>{{ t[1] }}</td>
+                    <td>
+                        <form action="/deleteTheaterAdmin" method="POST">
+                            <input type="hidden" name="theaterID" value={{t[0]}}>
+                            <input class="btn btn-danger" type="submit" value="DELETE Theater">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- GOTO ADD/REMOVE PAGE -->
+        <th><h3><button><a href="/addTheater">ADD THEATER</a></button></h3></th>
+    </div>
+
+    <br>
+
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+    <script src="/static/java.js "></script>
+
+</body>
+
+</html>

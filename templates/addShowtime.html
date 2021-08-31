@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<head>
+    <title>WCD</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="font-family:Impact" href="/">IMT</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/admin">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<html lang="en">
+
+<head>
+    <title>ADMIN PAGE</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+</head>
+<div class="container">
+    <h1>Administrator Level - Add Showtime</h1>
+    <br>
+    <br>
+<br>
+
+
+<h2>Add Showtime From Database</h2>
+        <h5>To Add:</h5>
+        <table id="addShowtime" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th style="background-color:#9b9797">TITLE</th>
+                    <th style="background-color:#9b9797">START TIME</th>
+                    <th style="background-color:#9b9797">DAY</th>
+                    <th style="background-color:#9b9797">SEATS AVAILABLE</th>
+                    <th style="background-color:#9b9797"></th>
+                </tr>
+            </thead>
+            <tr>
+                    
+                <form name='addShowtime' action= '/addShowtime' method="POST">
+                
+                <th>
+                    <select name="movieTitle2">
+                        <!-- display all screens inside this dropdown -->
+                            {% for m in movies %}
+                                <option value="{{ m[0] }}">{{ m[0] }}</option>
+                            {% endfor %}
+                    </select>
+                </th>
+                <!-- <th><input type = "text" name="start_time"></th> -->
+                <th><select name="start_time">
+                    <option value="01:00">01:00 PM</option>
+                    <option value="02:30">03:30 PM</option>
+                    <option value="05:30">05:30 PM</option>
+                    <option value="08:30">08:30 PM</option>
+                    <option value="11:30">11:30 PM</option>
+                </select></th> 
+                <th><select name="movie_day">
+                    <option value="SUNDAY">Sunday</option>
+                    <option value="MONDAY">Monday</option>
+                    <option value="TUESDAY">Tuesday</option>
+                    <option value="WEDNESDAY">Wednesday</option>
+                    <option value="THURSDAY">Thursday</option>
+                    <option value="FRIDAY">Friday</option>
+                    <option value="SATURDAY">Saturday</option>
+                </select></th>      
+                <th><select name="seats_available">
+                    <option value="0">Yes</option>
+                    <option value="1">No</option>
+                </select></th>
+                <th><button class="btn btn-primary btn-sm" type="submit" name="button3" value="submitShowtime">Submit</button></th>
+            </tr>
+        </form>
+        </table>
+        
+        
+        <br>
+        <br>
+    </div>
+
+
+    <script>
+        $(document).ready(function() {
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+
+    <script src="/static/java.js "></script>
+
+</body>
+
+</html>

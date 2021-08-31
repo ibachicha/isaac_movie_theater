@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+
+<head>
+    <title>WCD</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="font-family:Impact" href="/">IMT</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/admin">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<html lang="en">
+
+<head>
+    <title>ADMIN PAGE</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<div class="container">
+    <h1>Administrator Level - Add Movie</h1>
+    <br>
+    <br>
+    <br>
+        <h2>Add Movie</h2>
+        
+        <table id="addMovie" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th style="background-color:#9b9797">TITLE</th>
+                    <th style="background-color:#9b9797">GENRE</th>
+                    <th style="background-color:#9b9797">RATING</th>
+                    <th style="background-color:#9b9797">SCREEN</th>
+                    <th style="background-color:#9b9797"></th>
+
+                </tr>
+            </thead>
+                <tr>
+                    
+                    <form name='insertMovie' action= '/addMovie' method="POST">
+                    <th><input type = "text" name="movieTitle"></th>
+                    <th><input type = "text" name="movieGenre"></th>      
+                    <th><input type = "text" name="movieRating"></th>   
+                    <th>
+                    <select name="screenName">
+                       
+                            {% for ms in screens %}
+                              <option value="{{ ms[0] }}">{{ ms[0] }}</option>
+                            {% endfor %}
+                    </select>
+                    <th><button class="btn btn-primary btn-sm" type="submit" name="button2" value="submitMovie">Submit</button></th>
+                </tr>
+            </form>
+        </table>       
+    </div>   
+
+
+
+    <script>
+        $(document).ready(function() {
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+
+    <script src="/static/java.js "></script>
+
+</body>
+
+</html>

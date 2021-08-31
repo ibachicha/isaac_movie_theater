@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>WCD</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/styles2.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="font-family:Impact" href="/">IMT</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">HOME</a></li>
+                <li class="active"><a href="/movies">NOW PLAYING</a></li>
+                <li><a href="/checkout">CHECKOUT</a></li>
+                <li class="nav navbar-nav navbar-right"><a href="/admin">ADMIN</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h2>Search Movies</h2>
+    <br>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>{{ message }}</strong>
+    </div>
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+
+
+
+
+    
+    <p>
+    Search a movie and we'll begin your reservation!
+    </p>
+    <br>
+    <br>
+
+    <form name="timeSEL">
+        <select name="timeVal" id="timeVal">
+            <option value="#">Select One</option>
+            {% for t in allTimes %}
+            <option value="{{t[0]}}">{{t[0]}}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-primary btn-sm" type="submit" name="timeVal" formaction="/movies">Search By Time</button>
+    </form>
+   
+
+    <div class="container">
+
+        <br>
+        <table class="table table-hover" border="3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>SHOWTIME</th>
+                    <th>MOVIE</th>
+                    <th>DAY</th>
+                    <th>THEATER</th>
+                    <th>GENRE</th>
+                    <th>RATING</th>
+                    <th>SOLD OUT</th>
+                    <th>SELECT</th>
+                </tr>
+            </thead>
+           
+            {% for td in timeData %}
+            <tr>
+                <td name = "showtimeID" value={{td[0]}}>{{ td.showtimeID }}</td>
+                <td name = "timeTitle" id="resultTime"><b>{{timeTitle}}</b></td>
+                <td name = "movieTitle2" value={{td[0]}}>{{ td.movieTitle2 }}</td> 
+                <td name = "day" value={{td[0]}}>{{ td.day }}</td>
+                <td name = "theaterName" value={{td[0]}}>{{ td.theaterName }}</td>             
+                <td name = "genreName" value={{td[0]}}>{{ td.genreName }}</td>                
+                <td name = "ratingType" value={{td[0]}}>{{ td.ratingType }}</td>           
+                <td name = "soldOut" value={{td[0]}}>{{ td.soldOut }}</td>
+                <td>
+                    <form name= "timePost" method='POST'>
+                        <input id="showtimeID" name="showtimeID" type="hidden" value="{{ td.showtimeID }}"> 
+                        <input id="soldOut" name="soldOut" type="hidden" value="{{ td.soldOut }}">
+                        <button class="btn btn-info btn-sm" type="submit" name="showtimeID" formaction="/movies">Select Time</button>
+                    </form>
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <br>
+    <br>
+
+
+    <form name="movieSEL">
+        <select name="moviesVal" id="moviesVal">
+            <option value="#">Select One</option>
+            {% for m in allMovies %}
+            <option value="{{m[0]}}">{{m[0]}}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-primary btn-sm" type="submit" name="movieVal" formaction="/movies">Search By Movie</button>
+       
+    </form>
+
+    <div class="container">
+       
+        <p></p>
+        <br>
+        <table class="table table-hover" border="3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>MOVIE</th>
+                    <th>SHOWTIME</th>
+                    <th>DAY</th>
+                    <th>THEATER</th>
+                    <th>GENRE</th>
+                    <th>RATING</th>
+                    <th>SOLD OUT</th>
+                    <th>SELECT</th>
+                </tr>
+            </thead>
+            {% for m in movieData %}
+            <tr>
+                <td name="showtimeID" value={{m[0]}}>{{ m.showtimeID }}</td>
+                <td name="resultMovie" id="resultMovie"><b>{{movieTitle}}</b></td>
+                <td name="showTime" value={{m[0]}}>{{ m.showTime }}</td>
+                <td name="day" value={{m[0]}}>{{ m.day }}</td>
+                <td name="theaterName" value={{m[0]}}>{{ m.theaterName }}</td>
+                <td name="genreName" value={{m[0]}}>{{ m.genreName }}</td>
+                <td name="ratingType" value={{m[0]}}>{{ m.ratingType }}</td>
+                <td name="soldOut" value={{m[0]}}>{{ m.soldOut }}</td>
+                <td>
+                    <form name= "timePost" method='POST'>
+                        <input id="showtimeID" name="showtimeID" type="hidden" value="{{ m.showtimeID }}">
+                        <input id="soldOut" name="soldOut" type="hidden" value="{{ m.soldOut }}"> 
+                        <button class="btn btn-info btn-sm" type="submit" name="showtimeID" formaction="/movies">Select Movie</button>
+                    </form>
+                </td>
+                
+            </tr>
+            {% endfor %}
+            
+           
+
+        </table>
+    
+        <p></p>
+        <p></p>
+    </div>
+
+    <script src="/static/java.js "></script>
+
+</body>
+
+</html>

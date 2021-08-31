@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>WCD</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/styles2.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="font-family:Impact" href="/">IMT</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">HOME</a></li>
+                <li><a href="/movies">NOW PLAYING</a></li>
+                <li><a href="/checkout">CHECKOUT</a></li>
+                <li class="nav navbar-nav navbar-right"><a href="/admin">ADMIN</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <h2>Reserve Your Tickets</h2>
+    <br>
+    <br>    
+    <!-- DISPLAYS THE HEADER OF CURRENT MOVIE -->
+    <h4>YOU'VE CHOOSEN: </h4>
+    <table>
+        <tr>
+            {% for rs in reserveMOV %}
+            <h3 {{rs[0]}}>{{ rs[0] }}</h3>
+            <h3 {{rs[0]}}>AT {{ rs[1] }}</h3>
+            <h3 {{rs[0]}}>ON {{ rs[2] }}</h3>
+            {% endfor %}
+         </tr>
+    </table>
+    
+    
+    <br>
+    <br>
+    <p>Enter Amount of Tickets For The Show!</p>
+    <div class="container">
+        <table class="table table-hover" border="3">
+            <thead>
+                <tr>
+                    <th>RESERVATION</th>
+                    <th>MOVIE</th>
+                    <th>ADULT TICKET</th>
+                    <th>CHILDREN TICKET</th>
+                    <th>SENIOR TICKET</th>
+                    <th></th>
+                </tr>
+            </thead>
+          
+            <tr>
+                <form name='reservationNum' method="POST">
+                {% for r in reserve %}
+                    <td><input type='text'name='reservationID' value={{r[0]}} readonly></td>
+                    <td><input type='text'name='movieTitle' value={{r[1]}} readonly></td>
+                {% endfor %}
+                    <td><input type="text" name='num_of_adults'></td>
+                    <td><input type="text" name='num_of_children'></td>
+                    <td><input type="text" name='num_of_seniors'></td> 
+                    <td>
+                        <button class="btn btn-primary btn-sm" type="submit" name='button1' value='submitTickets'>Update Reservation</button>
+                    </td>
+                </form>
+            </tr>    
+        </table>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <script src=""></script>
+
+</body>
+
+</html>
